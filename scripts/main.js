@@ -225,7 +225,6 @@ console.log(student);
 // попробуйте переписать функцию, используя тернарный оператор.
 // **************************
 
-
 // Вариант решения с использованием if:
 
 // const getMin = (a, b) => {
@@ -249,36 +248,35 @@ console.log(student);
 // console.log(getMin(a, b));
 // console.log(getMax(a, b));
 
-
 // **************************
 // Вариант решения с оператором "?"
 // P.S. В случае равенства a == b не имеет значения, что возвращать
 
-const getMin1 = (c, d) => {
-  return c < d ? c : d;
-}
-
-const getMax1 = (c, d) => {
-  return c > d ? c : d;
-}
-
-const c = 5;
-const d = 5;
-console.log(getMin1(c, d));
-console.log(getMax1(c, d));
-
-const checkAge = (age) => {
-  return age >= 18;
-}
-
-// const age = 17;
-// console.log(checkAge(age));
-
-// take input
-const age = prompt('Enter your current age: ');
-// call the function
-const value = checkAge(age);
-console.log(value);
+// const getMin1 = (c, d) => {
+//   return c < d ? c : d;
+// }
+//
+// const getMax1 = (c, d) => {
+//   return c > d ? c : d;
+// }
+//
+// const c = 5;
+// const d = 5;
+// console.log(getMin1(c, d));
+// console.log(getMax1(c, d));
+//
+// const checkAge = (age) => {
+//   return age >= 18;
+// }
+//
+// // const age = 17;
+// // console.log(checkAge(age));
+//
+// // take input
+// const age = prompt('Enter your current age: ');
+// // call the function
+// const value = checkAge(age);
+// console.log(value);
 
 // **************************
 // 7. Замена элементов массива:
@@ -291,8 +289,7 @@ console.log(value);
 //   let arr = [];
 // **************************
 
-
-const num = [0, 5, 10, 25, 33, 35, 20, 20, 83, 59];
+// const num = [0, 5, 10, 25, 33, 35, 20, 20, 83, 59];
 
 // console.log(number[0]);
 // console.log(number[1]);
@@ -306,13 +303,227 @@ const num = [0, 5, 10, 25, 33, 35, 20, 20, 83, 59];
 // console.log(number[9]);
 // console.log(number[10]);
 
-const replaceZero = number => {
-  const numStr = `${number}`;
-  if (numStr.includes('0')) {
-    return `${number}`.replaceAll('0', 'zero');
+// const replaceZero = number => {
+//   const numStr = `${number}`;
+//   if (numStr.includes('0')) {
+//     return `${number}`.replaceAll('0', 'zero');
+//   }
+//   return number;
+// }
+//
+// console.log(num.map(replaceZero).join(', '));
+
+// можно сократить:
+
+// const replaceZero = (number) => String(number).replaceAll('0', 'zero');
+// console.log(num.map(replaceZero).join(', '));
+
+// ************************************************************************************************
+//==================================TEST 3, 4=======================================================
+
+// console.log(square(5)); // ReferenceError
+// const square = function (number) {
+//   return number * number
+// };
+// console.log(square(5)); // 25
+
+// function sum() {
+//   return arguments[0] + arguments[1] + arguments[2]
+// }
+// console.log(sum (1, 2, 3)); // 6
+
+// function myFun (a, b, ...manyMoreArgs) {
+//   return a + b + manyMoreArgs[0]
+// }
+//
+// console.log(myFun(1, 2, 3, 4, 5)); //6
+
+// console.log(sayHello()); //hello
+//
+// function sayHello() {
+//   console.log('Hello');
+// }
+
+// console.log(sum(1, 2)); // ReferenceError
+// const sum = (a, b) => {
+//   return a + b;
+// }
+
+// const func = n => {
+//   if (n !==1) {
+//     return n * func (n - 1);
+//   } else {
+//     return 1;
+//   }
+// }
+// console.log(func(5)); //120
+
+// ************************************************************************************************
+//==================================lesson-4=======================================================
+
+// 5. Напишите функцию sum, которая возвращает сумму чисел следующим образом:
+//   console.log(sum(5)(2)); // 7
+
+(() => {
+  function sum(n1, n2) {
+    return n1 + n2;
   }
-  return number;
-}
+  console.log(sum(5, 2));
+})();
 
-console.log(num.map(replaceZero).join(', '));
+(() => {
+  const calc = (n1, n2, ...args) => {
+    let result = n1 + n2 || 1;
+    for (let i = 0; i < args.length; i++) {
+      result = args[i];
+    }
+    return result;
+  };
+  const n1 = 5;
+  const n2 = 2;
+  const sum = calc(n1, n2);
+  console.log(sum);
+})();
 
+// 6. Покрасьте абзацы по клику (событие click):
+// даны 3 абзаца:
+//   <p id="text1">Text 1</p>
+//   <p id="text2">Text 2</p>
+//   <p id="text3">Text 3</p>
+// дан массив цветов:
+//   const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+// по первому нажатию на абзац он должен покраситься в первый цвет из массива, по второму нажатию - во второй и так далее;
+// цвета из массива меняются бесконечно;
+// все абзацы работают независимо.
+
+// const text1 = document.getElementById('text1');
+// const text2 = document.getElementById('text2');
+// const text3 = document.getElementById('text3');
+//
+// let colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+//
+// function getColor() {
+//   for (let i = 0; i <= colors.length; ) {
+//     return function (event) {
+//       event.target.style.color = colors[i];
+//       i++;
+//       if (i > colors.length) {
+//         i = 0;
+//       }
+//     };
+//   }
+// }
+//
+// text1.addEventListener('click', getColor());
+// text2.addEventListener('click', getColor());
+// text3.addEventListener('click', getColor());
+
+// const text1 = document.getElementById('text1');
+// const text2 = document.getElementById('text2');
+// const text3 = document.getElementById('text3');
+//
+// const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+//
+// colors.forEach(function(item, i, colors) {
+//   for (const i = 0; i <= colors.length;) {
+//       return function(MouseEvent) {
+//         MouseEvent(i + ": " + item + " (array:" + colors + ")");
+//     }
+//   }
+// });
+//
+// text1.addEventListener('click', colors.forEach());
+// text2.addEventListener('click', colors.forEach());
+// text3.addEventListener('click', colors.forEach());
+
+// text2.addEventListener('click', (event) => {
+//   event.target.style.color = document.getElementById;
+// });
+// text3.addEventListener('click', (event) => {
+//   event.target.style.color = document.getElementById;
+// });
+
+// ***************************************************************************************
+// alert('I am JS!');
+// prompt('I am JS!')
+// console.log('I am JS!');
+//
+// alert('Hello');
+// alert('world!');
+// console.log('Hello');
+// console.log('world!');
+//
+// alert(3 +
+//   1
+//   + 2);
+// console.log(3 +
+// 1
+// +2);
+//
+// alert('Hello');
+// [1, 2].forEach(alert);
+//
+// console.log('Hello');
+// [1, 2].forEach(console.log);
+//
+// // alert('Hello')[1, 2].forEach(alert); - 1. Hello; 2. TypeError: undefined is not an object (evaluating 'alert('Hello')[1, 2]')
+//
+// let message = 'Hello!'; // определяем переменную и присваиваем ей значение
+//
+// alert(message); // Hello!
+// console.log(message);
+
+// let user = 'John';
+// let age = 25;
+//
+// console.log(user, age);
+//
+// const birthday = '03.06.1986';
+// console.log(birthday);
+//
+// let admin, name;
+//
+// name = 'Julia';
+// admin = name;
+//
+// alert(admin);
+// console.log(admin);
+//
+// const planet = 'Earth';
+//
+// alert(planet);
+// console.log(planet);
+
+// const myBirthday = '03.06.1986';
+// let myAge = someCode(myBirthday);
+//
+// function someCode(): any {
+// }
+
+// let name = 'Ilya';
+//
+// // выражение - число 1
+// alert(`hello ${1}`); // hello 1
+// console.log(`hello ${1}`);
+//
+// // выражение - строка "name"
+// alert(`hello ${'name'}`); //hello name
+// console.log(`hello ${'name'}`);
+//
+// // выражение - переменная, вставим её в строку
+// alert(`hello ${name}`); //hello Ilya
+// console.log(`hello ${name}`);
+
+// prototype
+//
+// const person {
+//   name: 'Max',
+//   age: 25,
+//   greet function () {
+//     console.log(Greet!)
+//   }
+//   console.log(person);
+// }
+import { sayHi } from './module.js';
+
+console.log(sayHi('John'));
